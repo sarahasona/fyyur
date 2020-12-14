@@ -1,0 +1,31 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Fyyur | Artists{% endblock %}
+{% block content %}
+<ul class="items">
+	{% for artist in artists %}
+	<li>
+		<a href="/artists/{{ artist.id }}">
+			<i class="fas fa-users"></i>
+			<div class="item">
+				<h5>{{ artist.name }}</h5>
+			</div>
+		</a>
+		<a href="/artists/{{artist.id}}/edit"><button class="btn btn-default btn-lg">Edit an artist</button></a>
+				
+	</li>
+	{% endfor %}
+</ul>
+<script>
+	
+	Editbtns = document.querySelectorAll('.Editbtn');
+	for(i=0;i<Editbtns.length;i++){
+		seledit= Editbtns[i];
+		seledit.onclick = function(e){
+			console.log('event ',e);
+			id = e.target.dataset['id'];
+			console.log('id ',id);
+			fetch('/artists/'+ id +'/edit');
+		}
+	}		 
+</script>
+{% endblock %}
